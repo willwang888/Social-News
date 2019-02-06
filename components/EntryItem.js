@@ -11,7 +11,6 @@ class EntryItem extends React.Component {
   }
 
   handlePress() {
-    console.log("pressed")
     this.props.navigation.navigate('Entry', { title: this.props.entry.title, entry: this.props.entry });
   }
 

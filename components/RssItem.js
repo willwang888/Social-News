@@ -23,17 +23,10 @@ class RssItem extends React.Component {
 
   // Performs async fetch of RSS url
   componentDidMount() {
-    console.log("URL for RSS Item is: " + this.state.url)
     fetch(this.state.url)
       .then((response) => response.text())
       .then((responseData) => rssParser.parse(responseData))
       .then((rss) => {
-        console.log("here")
-        console.log(typeof(rss))
-        console.log(rss.title);
-        console.log(rss.items.length);
-        console.log(rss.links[0].url);
-
         let arr = rss.items
 
         arr.sort(function(a,b){
@@ -56,7 +49,6 @@ class RssItem extends React.Component {
   }
 
   handlePress() {
-    console.log(this.state.entries)
     this.props.navigation.navigate('Articles', {
       title: this.state.title,
       entries: this.state.entries,

@@ -9,10 +9,6 @@ class EntryDetail extends React.Component {
     this.state = {
       entry: this.props.entry
     };
-
-    console.log("HELLO THERE")
-    console.log(this.state.entry.links[0].url)
-    console.log(typeof(this.state.entry.links[0].url))
   }
 
   render() {

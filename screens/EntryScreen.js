@@ -2,19 +2,22 @@ import React, { PropTypes } from 'react';
 import { Button, View, StyleSheet } from 'react-native';
 import Colors from '../constants/Colors';
 import EntryDetail from '../components/EntryDetail';
+import {connect} from 'react-redux';
 
-export default class EntryScreen extends React.Component {
+import { addBookmark } from '../redux/actions/bookmarks.actions';
+
+class EntryScreen extends React.Component {
 
   // Sets alert params. Needed to show header button alerts
   componentDidMount(){
-    this.props.navigation.setParams({ addBookmark: this.addBMark });
+    this.props.navigation.setParams({ addBookmark: this.addBookmark });
   }
 
   // Initializes navigation header
   static navigationOptions = ({ navigation }) => {
       const { params = {} } = navigation.state;
       return {
-          title: navigation.getParam('title', 'No Title Here'),
+          title: navigation.getParam('title', 'Bookmarks'),
           headerTitleStyle :{color:'white'},
           headerStyle: {backgroundColor:'black'},
           headerRight: <Button
@@ -25,8 +28,8 @@ export default class EntryScreen extends React.Component {
       };
   };
 
-  addBMark(entry) {
-    console.log("add bookmark " + entry)
+  addBookmark = (entry) => {
+    this.props.addBookmark(entry)
   }
 
   render() {
@@ -44,3 +47,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#EEE'
   }
 });
+
+const mapStateToProps = (state) => ({
+  globals: state
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addBookmark: (bookmarkObj) => dispatch(addBookmark(bookmarkObj))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(EntryScreen);

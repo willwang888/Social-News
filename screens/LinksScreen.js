@@ -65,11 +65,8 @@ class LinksScreen extends React.Component {
 
   // Saves new RSS feed into local array
   handleSaveRss(rssUrl) {
-    console.log("Saving: " + rssUrl)
 
     let newRssList = this.state.rssList;
-
-    console.log(this.state.rssList)
 
     if (newRssList.length && !newRssList.includes(rssUrl)) {
       newRssList.push(rssUrl);
@@ -103,7 +100,6 @@ class LinksScreen extends React.Component {
 
   // Opens prompt for user to input new RSS feed
   openAddRssAlert() {
-    console.log("in alert function")
     AlertIOS.prompt(
       'Add New Subscription',
       'Enter RSS Link of what you wish to subscribe to',
@@ -122,14 +118,9 @@ class LinksScreen extends React.Component {
   }
 
   render() {
-    console.log("HEREEEE")
-    console.log(this.props.globals);
-    console.log(this.state)
-    console.log("Adding bookmark")
 
     return (
       <View style={styles.container}>
-        <Button onPress={() => this.props.addBookmark({"test": "bookmark2"})} title="Click Me1" />
         <RssList
           urls={this.state.rssList}
           isRefreshing={false}
