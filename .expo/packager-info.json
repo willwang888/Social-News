@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 23144,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
   "expoServerNgrokUrl": "https://nn-dj5.anonymous.social-news-mobile.exp.direct",
   "packagerNgrokUrl": "https://packager.nn-dj5.anonymous.social-news-mobile.exp.direct",
-  "ngrokPid": 23167
+  "ngrokPid": 1775
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity,
          ActivityIndicator, StyleSheet } from 'react-native';
+import { withNavigation } from 'react-navigation';
 
 import * as rssParser from 'react-native-rss-parser';
 
@@ -16,11 +17,11 @@ class RssItem extends React.Component {
       entries: [],
       isLoading: true
     };
+
+    this.handlePress = this.handlePress.bind(this);
   }
 
-  /*
-    Performs async fetch of RSS url
-  */
+  // Performs async fetch of RSS url
   componentDidMount() {
     console.log("URL for RSS Item is: " + this.state.url)
     fetch(this.state.url)
@@ -43,9 +44,18 @@ class RssItem extends React.Component {
     });
   }
 
+  handlePress() {
+    console.log(this.state.entries)
+    this.props.navigation.navigate('Articles', {
+      title: this.state.title,
+      entries: this.state.entries
+    });
+  }
+
   render() {
     return (
       <TouchableOpacity
+        onPress={this.state.isLoading ? () => {} : this.handlePress}
         onLongPress={() => this.props.handleDelete(this.props.url)}
       >
         <View style={styles.rssContainer}>
@@ -106,4 +116,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default RssItem;
+export default withNavigation(RssItem);
