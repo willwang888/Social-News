@@ -15,6 +15,7 @@ class LinksScreen extends React.Component {
     // Initialized for testing
     this.state ={
       rssList: ["https://medium.com/feed/@Medium", "http://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"],
+      bookmarks: [],
       isLoading: true
     }
 
@@ -22,6 +23,7 @@ class LinksScreen extends React.Component {
     this.handleSaveRss = this.handleSaveRss.bind(this);
     this.handleDeleteRss = this.handleDeleteRss.bind(this);
     this.openAddRssAlert = this.openAddRssAlert.bind(this);
+    this.addBookmark = this.addBookmark.bind(this);
   }
 
   // Sets alert params. Needed to show header button alerts
@@ -49,6 +51,16 @@ class LinksScreen extends React.Component {
       this.setState({
         rssList: this.state.rssList
       });
+  }
+
+  addBookmark(entry) {
+    let currBookmarks = this.state.bookmarks
+
+    currBookmarks.push(entry)
+
+    this.setstate({
+      bookmarks: currBookmarks
+    })
   }
 
   // Saves new RSS feed into local array
@@ -123,6 +135,7 @@ class LinksScreen extends React.Component {
           isRefreshing={false}
           handleRefresh={this.getRssList}
           handleDelete={this.handleDeleteRss}
+          addBookmark={this.addBookmark}
         />
       </View>
     );

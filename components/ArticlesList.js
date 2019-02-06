@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation';
 
 const ArticlesList = (props) => {
   const renderArticles = () => props.entries.map((entry, index) => (
-    <EntryItem key={index} entry={entry} />
+    <EntryItem key={index} entry={entry} addBookmark={props.addBookmark} />
   ));
 
   return (

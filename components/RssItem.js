@@ -34,11 +34,22 @@ class RssItem extends React.Component {
         console.log(rss.items.length);
         console.log(rss.links[0].url);
 
+        let arr = rss.items
+
+        arr.sort(function(a,b){
+          let d1 = new Date(a.published)
+          let d2 = new Date(b.published)
+          if(d1.getTime() <= d2.getTime()){
+            return 1;
+          }
+          return -1;
+        })
+
         this.setState({
           title: rss.title,
           description: rss.description,
           link: rss.links[0].url,
-          entries: rss.items,
+          entries: arr,
           isLoading: false
         });
     });
@@ -48,7 +59,8 @@ class RssItem extends React.Component {
     console.log(this.state.entries)
     this.props.navigation.navigate('Articles', {
       title: this.state.title,
-      entries: this.state.entries
+      entries: this.state.entries,
+      addBookmark: this.props.addBookmark
     });
   }
 

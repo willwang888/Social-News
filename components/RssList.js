@@ -10,6 +10,7 @@ const RssList = (props) => {
       key={oneUrl}
       url={oneUrl}
       handleDelete={props.handleDelete}
+      addBookmark={props.addBookmark}
     />
   ));
 
