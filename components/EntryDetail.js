@@ -2,19 +2,28 @@ import React, { PropTypes } from 'react';
 import { WebView, ScrollView, Text, StyleSheet } from 'react-native';
 import Colors from '../constants/Colors';
 
-const EntryDetail = (props) => {
-  const entry = props.entry;
-  console.log("HELLO THERE")
-  console.log(entry.links[0].url)
-  console.log(typeof(entry.links[0].url))
+class EntryDetail extends React.Component {
+  constructor(props){
+    super(props);
 
-  return (
-    <WebView
-      source={{uri: entry.links[0].url}}
-      style={{marginTop: 20}}
-    />
-  );
-};
+    this.state = {
+      entry: this.props.entry
+    };
+
+    console.log("HELLO THERE")
+    console.log(this.state.entry.links[0].url)
+    console.log(typeof(this.state.entry.links[0].url))
+  }
+
+  render() {
+    return (
+      <WebView
+        source={{uri: this.state.entry.links[0].url}}
+        style={{marginTop: 20}}
+      />
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

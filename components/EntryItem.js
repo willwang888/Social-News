@@ -26,7 +26,7 @@ class EntryItem extends React.Component {
           </Text>
 
           <Text style={styles.footer}>
-            {entry.author}
+            {entry.published}
           </Text>
         </View>
       </TouchableOpacity>

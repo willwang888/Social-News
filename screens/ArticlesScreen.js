@@ -32,6 +32,7 @@ export default class ArticlesScreen extends React.Component {
         <ArticlesList
           title={this.props.navigation.getParam('title', 'no title')}
           entries={this.props.navigation.getParam('entries', [])}
+          addBookmark={this.props.navigation.getParam('addBookmark')}
         />
       </View>
     );
