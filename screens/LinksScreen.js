@@ -3,8 +3,12 @@ import { Alert, AlertIOS, Button, View, ScrollView, StyleSheet } from 'react-nat
 import { ExpoLinksView } from '@expo/samples';
 import * as rssParser from 'react-native-rss-parser';
 import RssList from '../components/RssList';
+import {connect} from 'react-redux';
 
-export default class LinksScreen extends React.Component {
+import { addBookmark } from '../redux/actions/bookmarks.actions';
+
+
+class LinksScreen extends React.Component {
   constructor(props){
     super(props);
 
@@ -106,8 +110,14 @@ export default class LinksScreen extends React.Component {
   }
 
   render() {
+    console.log("HEREEEE")
+    console.log(this.props.globals);
+    console.log(this.state)
+    console.log("Adding bookmark")
+
     return (
       <View style={styles.container}>
+        <Button onPress={() => this.props.addBookmark({"test": "bookmark2"})} title="Click Me1" />
         <RssList
           urls={this.state.rssList}
           isRefreshing={false}
@@ -125,3 +135,15 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
 });
+
+const mapStateToProps = (state) => ({
+  globals: state
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addBookmark: (bookmarkObj) => dispatch(addBookmark(bookmarkObj))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LinksScreen);
