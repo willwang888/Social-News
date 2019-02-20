@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 import SignupScreen from '../screens/SignupScreen';
 import LoginScreen from '../screens/LoginScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const AuthNavigator = createStackNavigator(
   {
@@ -9,6 +10,9 @@ const AuthNavigator = createStackNavigator(
     },
     'Signup': {
       screen: SignupScreen,
+    },
+    'Settings': {
+      screen: SettingsScreen,
     },
   },
   {

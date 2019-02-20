@@ -1,10 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import PaddedContainer from '../../components/PaddedContainer';
+import { loginAction } from '../../redux/actions/user.actions';
 
 import globalStyles from '../../constants/Globals';
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -15,15 +18,28 @@ export default class LoginScreen extends React.Component {
   }
 
   handleLoginPress = () => {
-    console.log(this.state);
+    const { username, password } = this.state;
+    const { login } = this.props;
+
+    login(username, password);
   }
 
   navigateToSignupScreen = () => {
-    this.props.navigation.navigate('Signup');
+    const { navigation } = this.props;
+    navigation.navigate('Signup');
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { navigation } = this.props;
+
+    if (nextProps.globals.user) {
+      navigation.navigate('Main');
+    }
   }
 
   render() {
     const { username, password } = this.state;
+
     return (
       <PaddedContainer>
         <Text style={[globalStyles.textHeaderLarge, globalStyles.textCenter]}>Paper</Text>
@@ -53,3 +69,21 @@ export default class LoginScreen extends React.Component {
     );
   }
 }
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.object,
+  login: PropTypes.func,
+};
+
+
+const mapStateToProps = (state) => ({
+  globals: state,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (username, password) => dispatch(loginAction(username, password)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
