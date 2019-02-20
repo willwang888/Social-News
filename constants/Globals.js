@@ -23,14 +23,44 @@ export default StyleSheet.create({
     fontSize: 32,
     marginBottom: 20,
   },
+  textHeader: {
+    fontFamily: Fonts.serifBold,
+    color: Colors.darkText,
+    fontSize: 26,
+    marginBottom: 16,
+  },
+  textHeaderSmall: {
+    fontFamily: Fonts.serifBold,
+    color: Colors.darkText,
+    fontSize: 22,
+    marginBottom: 16,
+  },
   textBodyLarge: {
     fontFamily: Fonts.sansSerifRegular,
     color: Colors.darkText,
     fontSize: 18,
+    lineHeight: 24,
+    marginVertical: 6,
   },
   textBody: {
     fontFamily: Fonts.sansSerifRegular,
+    color: Colors.darkText,
     fontSize: 16,
+    lineHeight: 22,
+    marginVertical: 6,
+  },
+  textBodySmall: {
+    fontFamily: Fonts.sansSerifRegular,
+    color: Colors.darkText,
+    fontSize: 14,
+    lineHeight: 22,
+    marginVertical: 6,
+  },
+  textGray: {
+    color: Colors.mediumGray,
+  },
+  textBodyBold: {
+    color: Colors.sansSerifBold,
   },
   input: {
     borderBottomColor: Colors.lightGray,
@@ -63,14 +93,12 @@ export default StyleSheet.create({
     color: Colors.darkText,
     fontFamily: Fonts.sansSerifBold,
     textAlign: 'center',
-    textTransform: 'uppercase',
     fontSize: 18,
   },
   buttonTextWhite: {
     color: Colors.white,
     fontFamily: Fonts.sansSerifBold,
     textAlign: 'center',
-    textTransform: 'uppercase',
     fontSize: 18,
   },
   textCenter: {

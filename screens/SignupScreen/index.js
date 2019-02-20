@@ -34,13 +34,13 @@ export default class SignupScreen extends React.Component {
           style={[globalStyles.input, globalStyles.textBodyLarge]}
           onChangeText={(text) => this.setState({ firstName: text })}
           value={firstName}
-          placeholder="Enter firstName..."
+          placeholder="Enter first name..."
         />
         <TextInput
           style={[globalStyles.input, globalStyles.textBodyLarge]}
           onChangeText={(text) => this.setState({ lastName: text })}
           value={lastName}
-          placeholder="Enter lastName..."
+          placeholder="Enter last name..."
         />
         <TextInput
           style={[globalStyles.input, globalStyles.textBodyLarge]}
