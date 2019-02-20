@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import PaddedContainer from '../../components/PaddedContainer';
-
 import globalStyles from '../../constants/Globals';
 
-export default class SignupScreen extends React.Component {
+import { signupAction } from '../../redux/actions/user.actions';
+
+class SignupScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -18,34 +21,17 @@ export default class SignupScreen extends React.Component {
   }
 
   handleSignupPress = () => {
-    console.log(this.state);
 
-    const url = 'http://127.0.0.1:8000/users/signup';
+    const { signup } = this.props;
+    signup(this.state);
+  }
 
-    fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({
-        username: this.state.username,
-        password: this.state.password,
-        firstname: this.state.firstName,
-        lastname: this.state.lastName,
-        email: this.state.email,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => res.json())
-      .then((res) => {
-        console.log(res);
+  componentWillReceiveProps(nextProps) {
+    const { navigation } = this.props;
 
-        // Response ok?
-
-        this.props.navigation.navigate('Settings');
-      })
-      .catch((error) => {
-        this.setState({ error, loading: false });
-      });
+    if (nextProps.globals.user) {
+      navigation.navigate('Main');
+    }
   }
 
   navigateToLoginScreen = () => {
@@ -89,7 +75,7 @@ export default class SignupScreen extends React.Component {
         />
         <TouchableOpacity onPress={() => this.handleSignupPress()}>
           <View style={[globalStyles.buttonBlackBorder]}>
-            <Text style={[globalStyles.buttonTextDark]}>Log In</Text>
+            <Text style={[globalStyles.buttonTextDark]}>Sign Up</Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => this.navigateToLoginScreen()}>
@@ -103,3 +89,21 @@ export default class SignupScreen extends React.Component {
     );
   }
 }
+
+SignupScreen.propTypes = {
+  globals: PropTypes.object,
+  navigation: PropTypes.object,
+  signup: PropTypes.func,
+};
+
+const mapStateToProps = (state) => ({
+  globals: state,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signup: (username, password) => dispatch(signupAction(username, password)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(SignupScreen);
