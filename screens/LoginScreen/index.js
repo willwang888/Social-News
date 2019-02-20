@@ -29,9 +29,17 @@ class LoginScreen extends React.Component {
     navigation.navigate('Signup');
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { navigation } = this.props;
+
+    if (nextProps.globals.user) {
+      navigation.navigate('Main');
+    }
+  }
+
   render() {
-    console.log("PROPS IN LOGIN ", this.props.globals);
     const { username, password } = this.state;
+
     return (
       <PaddedContainer>
         <Text style={[globalStyles.textHeaderLarge, globalStyles.textCenter]}>Paper</Text>
