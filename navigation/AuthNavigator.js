@@ -11,6 +11,9 @@ const AuthNavigator = createStackNavigator(
       screen: SignupScreen,
     },
   },
+  {
+    headerMode: 'screen',
+  }
 );
 
 export default AuthNavigator;

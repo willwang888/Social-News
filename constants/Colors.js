@@ -17,6 +17,7 @@ export default {
   white: '#fff',
   offWhite: '#fafafa',
   lightGray: '#ECEAE4',
+  mediumGray: '#8F8D87',
   darkGray: '#595751',
   accentPrimary: tintColor,
   accentSecondary: 'blue',

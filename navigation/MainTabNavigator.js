@@ -9,14 +9,15 @@ import HomeScreen from '../screens/HomeScreen';
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import ArticlesScreen from '../screens/ArticlesScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import EntryScreen from '../screens/EntryScreen';
 
-const HomeStack = createStackNavigator({
+const SocialStack = createStackNavigator({
   Home: HomeScreen,
 });
 
-HomeStack.navigationOptions = {
-  tabBarLabel: ({ focused }) => <TabBarLabel title="Explore" focused={focused} />,
+SocialStack.navigationOptions = {
+  tabBarLabel: ({ focused }) => <TabBarLabel title="Social" focused={focused} />,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -29,7 +30,7 @@ HomeStack.navigationOptions = {
   ),
 };
 
-const LinksStack = createStackNavigator(
+const ExploreStack = createStackNavigator(
   {
     Feed: LinksScreen,
     Articles: ArticlesScreen,
@@ -40,8 +41,8 @@ const LinksStack = createStackNavigator(
   }
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: ({ focused }) => <TabBarLabel title="Social" focused={focused} />,
+ExploreStack.navigationOptions = {
+  tabBarLabel: ({ focused }) => <TabBarLabel title="Explore" focused={focused} />,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
       focused={focused}
@@ -50,11 +51,17 @@ LinksStack.navigationOptions = {
   ),
 };
 
-const SettingsStack = createStackNavigator({
-  Settings: SettingsScreen,
-});
+const ProfileStack = createStackNavigator(
+  {
+    Settings: SettingsScreen,
+    Profile: ProfileScreen,
+  },
+  {
+    initialRouteName: 'Profile',
+  }
+);
 
-SettingsStack.navigationOptions = {
+ProfileStack.navigationOptions = {
   tabBarLabel: ({ focused }) => <TabBarLabel title="Profile" focused={focused} />,
   tabBarIcon: ({ focused }) => (
     <TabBarIcon
@@ -64,8 +71,13 @@ SettingsStack.navigationOptions = {
   ),
 };
 
-export default createBottomTabNavigator({
-  HomeStack,
-  LinksStack,
-  SettingsStack,
-});
+export default createBottomTabNavigator(
+  {
+    SocialStack,
+    ExploreStack,
+    ProfileStack,
+  },
+  {
+    initialRouteName: 'ProfileStack',
+  }
+);
