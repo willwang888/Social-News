@@ -13,7 +13,7 @@ const AuthNavigator = createStackNavigator(
     },
     'Settings': {
       screen: SettingsScreen,
-    }
+    },
   },
 );
 

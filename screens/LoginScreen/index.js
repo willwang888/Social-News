@@ -1,10 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import PaddedContainer from '../../components/PaddedContainer';
+import { loginAction } from '../../redux/actions/user.actions';
 
 import globalStyles from '../../constants/Globals';
 
-export default class LoginScreen extends React.Component {
+class LoginScreen extends React.Component {
   static navigationOptions = {
     header: null,
   };
@@ -15,39 +18,19 @@ export default class LoginScreen extends React.Component {
   }
 
   handleLoginPress = () => {
-    console.log(this.state);
+    const { username, password } = this.state;
+    const { login } = this.props;
 
-    const url = "http://127.0.0.1:8000/users/login";
-
-    fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({
-          username: this.state.username,
-          password: this.state.password,
-        }),
-        headers: {
-          "Content-Type":"application/json"
-        }
-      })
-      .then(res => res.json())
-      .then(res => {
-        console.log(res)
-
-        // Response ok?
-        
-
-        this.props.navigation.navigate('Settings');
-      })
-      .catch(error => {
-        this.setState({ error, loading : false });
-      })
+    login(username, password);
   }
 
   navigateToSignupScreen = () => {
-    this.props.navigation.navigate('Signup');
+    const { navigation } = this.props;
+    navigation.navigate('Signup');
   }
 
   render() {
+    console.log("PROPS IN LOGIN ", this.props.globals);
     const { username, password } = this.state;
     return (
       <PaddedContainer>
@@ -78,3 +61,21 @@ export default class LoginScreen extends React.Component {
     );
   }
 }
+
+LoginScreen.propTypes = {
+  navigation: PropTypes.object,
+  login: PropTypes.func,
+};
+
+
+const mapStateToProps = (state) => ({
+  globals: state,
+});
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    login: (username, password) => dispatch(loginAction(username, password)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);

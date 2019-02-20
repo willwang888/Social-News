@@ -20,32 +20,32 @@ export default class SignupScreen extends React.Component {
   handleSignupPress = () => {
     console.log(this.state);
 
-    const url = "http://127.0.0.1:8000/users/signup";
+    const url = 'http://127.0.0.1:8000/users/signup';
 
     fetch(url, {
-        method: 'POST',
-        body: JSON.stringify({
-          username: this.state.username,
-          password: this.state.password,
-          firstname: this.state.firstName,
-          lastname: this.state.lastName,
-          email: this.state.email
-        }),
-        headers: {
-          "Content-Type":"application/json"
-        }
-      })
-      .then(res => res.json())
-      .then(res => {
-        console.log(res)
+      method: 'POST',
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+        firstname: this.state.firstName,
+        lastname: this.state.lastName,
+        email: this.state.email,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
 
         // Response ok?
 
         this.props.navigation.navigate('Settings');
       })
-      .catch(error => {
-        this.setState({ error, loading : false });
-      })
+      .catch((error) => {
+        this.setState({ error, loading: false });
+      });
   }
 
   navigateToLoginScreen = () => {
