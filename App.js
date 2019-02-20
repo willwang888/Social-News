@@ -1,9 +1,9 @@
 import React from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { AppLoading, Asset, Font, Icon } from 'expo';
+import { Provider } from 'react-redux';
 import AppNavigator from './navigation/AppNavigator';
-import {initStore} from './redux/store.js';
-import {Provider} from 'react-redux';
+import { initStore } from './redux/store.js';
 
 const store = initStore();
 
@@ -23,16 +23,15 @@ export default class App extends React.Component {
           />
         </Provider>
       );
-    } else {
-      return (
-        <Provider store={store}>
-          <View style={styles.container}>
-            {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-            <AppNavigator />
-          </View>
-        </Provider>
-      );
     }
+    return (
+      <Provider store={store}>
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <AppNavigator />
+        </View>
+      </Provider>
+    );
   }
 
   _loadResourcesAsync = async () => {
@@ -51,7 +50,7 @@ export default class App extends React.Component {
     ]);
   };
 
-  _handleLoadingError = error => {
+  _handleLoadingError = (error) => {
     // In this case, you might want to report the error to your error
     // reporting service, for example Sentry
     console.warn(error);

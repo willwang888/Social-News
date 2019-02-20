@@ -2,10 +2,10 @@ import Types from '../actions/index.actions';
 
 const bookmarks = (state = [], action) => {
   switch (action.type) {
-  case Types.UPLOAD_BOOKMARK:
-  	return [...state, action.bookmark]
-  default:
-    return state;
+    case Types.UPLOAD_BOOKMARK:
+  	return [...state, action.bookmark];
+    default:
+      return state;
   }
 };
 
